@@ -24,7 +24,7 @@ Planned later:
 
 ## Current Route
 
-- App route: `/`, served under the GitHub repository base path in production
+- App route: `/` on ChatGPT Sites. GitHub Actions builds use the GitHub repository base path.
 - Entry page: `app/page.tsx`
 - Main UI: `app/_components/results-reporter-project-page.tsx`
 

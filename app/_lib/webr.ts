@@ -33,7 +33,7 @@ type WebRInstance = {
     },
   ): Promise<void>;
   FS: {
-    writeFile(path: string, data: string): Promise<void> | void;
+    writeFile(path: string, data: Uint8Array): Promise<void>;
   };
   Shelter: new () => Promise<Shelter>;
 };
@@ -78,7 +78,7 @@ export async function runCapturedR(options: {
   await ensureGgplot2(webR);
 
   for (const file of options.files ?? []) {
-    await webR.FS.writeFile(file.path, file.content);
+    await webR.FS.writeFile(file.path, new TextEncoder().encode(file.content));
   }
 
   const shelter = await new webR.Shelter();
@@ -116,7 +116,7 @@ export async function runCapturedR(options: {
 
         return "";
       })
-      .join("");
+      .join("\n");
 
     return {
       images: capture.images ?? [],
